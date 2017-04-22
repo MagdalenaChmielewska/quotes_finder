@@ -10,4 +10,3 @@ If you want to run quotes finder please use following command:
 ```bash
 npm run start
 ```
-

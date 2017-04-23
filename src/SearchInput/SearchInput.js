@@ -176,15 +176,18 @@ class AuthorAdapter extends ItemAdapter {
 AuthorAdapter.instance = new AuthorAdapter()
 
 class SearchInput extends Component {
-   constructor() {
-    super();
+  setAuthorState(selectedValue) {
+    var author = {}
 
-    this.state = {
-      value: '',
-      suggestions: []
-    };    
+    if(selectedValue !== null && selectedValue.name !== undefined) {
+      author = selectedValue
+    } else {
+      author = { name: selectedValue }
+    }
+
+    this.props.updateAuthor(author)
   }
-
+  
   render() {
     return (
        <Autosuggest
@@ -192,7 +195,8 @@ class SearchInput extends Component {
         placeholder="Quotes of which author you would like to find?"
         itemAdapter={AuthorAdapter.instance}
         itemReactKeyPropName="permalink"
-        itemValuePropName="name" />
+        itemValuePropName="name"
+        onSelect={this.setAuthorState.bind(this)} />
     );
   }
 }
